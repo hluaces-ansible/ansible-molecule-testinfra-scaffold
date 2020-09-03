@@ -30,15 +30,21 @@ Molecule has several test matrixes. I'm just naming a few of them for simplicity
 - `molecule test`: this pretty much executes all possible tests in order and destroys the containers upon ending. This is what you usually want in your pipelines.
 - `molecule destroy`: Use this when you are done and want to clear molecule's cache and any created running containers.
 
-All of the previous commands should be executed from this repository root directory.
-
-# How to run these in pipelines?
-
-You should either use Docker in Docker or a testing environment with shell capabilities able to use docker.
+All of the previous commands should be executed from this repository's root directory.
 
 # Docker is not enough for my testing!
 
 Molecule allows for more platform options (cloud images, KVM, amongst them). This POC is not covering them ATM.
+
+# How to run molecule tests in pipelines?
+
+That really depends on the kind of technology you are using for your containers (see point above).
+
+A Docker image could be enough if you are delegating your images to a cloud provider.
+
+If you want to create Docker images you'll need to execute molecule from a Docker in Docker context.
+
+If you need Vagrant you'll probably need something with virtualization capabilities, such as a Gitlab 'shell' Runner, or Jenkins environment.
 
 # Contributing
 
