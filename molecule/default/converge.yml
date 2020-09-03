@@ -1,0 +1,24 @@
+---
+- name: 'Add some extra lines to a hosts file'
+  hosts: all
+  gather_facts: false
+  vars:
+    _hosts_file_path: "/root/hosts"
+  tasks:
+    # We could add a volume to edit the actual /etc/hosts file, but I've decided
+    # to not modify the host system on this POC, so I'll leave it like this.
+    - name: 'Create a new hosts file'
+      file:
+        path: "{{ _hosts_file_path }}"
+        state: 'touch'
+        owner: 'root'
+        group: 'root'
+        mode: '0644'
+
+    - name: 'Add a random line to the hosts file'
+      lineinfile:
+        path: "{{ _hosts_file_path }}"
+        line: '127.0.0.1 molecule.example.com'
+        owner: 'root'
+        group: 'root'
+        mode: '0644'
